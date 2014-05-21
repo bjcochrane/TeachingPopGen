@@ -1,0 +1,119 @@
+Title
+========================================================
+
+```{r}
+library(TeachingPopGen)
+```
+
+```{r}
+foof(111)
+```
+
+OK, so it looks as though the compiled version is Unix specific - 
+```{r}
+dyn.load("foo.so")
+```
+
+Here's an attempt with inline:
+
+```{r}
+sq <-cfunction(signature(n="integer",x="numeric"),"foo.c")
+```
+A little function I stole from the web:
+```{r}
+Pca <- function(n, N = 1000) {
+
+      # This function will approximate the probability of no
+      # coalescent events in a sample of n chromosomes from
+      # a diploid population of size N
+
+      1.0 - (n * (n-1)) / (4 * N)
+
+      }
+
+```
+```{r}
+SingleLocusTree <- function(n = 10, N = 1000, debug = FALSE) {
+
+   # Length of each branch in the tree
+   lengths <- rep(0, n)
+
+   # Number of descendants for each node
+   descendants <- rep(1, n)
+
+   # Parent node for each node
+   parent <- rep(0, n)
+
+   # Descendant nodes for each node
+   activeNodes <- 1:n
+
+   nextNode = n + 1
+
+   for (i in n:2)
+      {
+      # sample time to next coalescent event
+      t <- rexp(1, rate = (i*(i-1)/2)/N)
+
+      # all current nodes increase in length by time t
+      lengths[activeNodes] <- lengths[activeNodes] + t
+
+      # next we select two nodes to coalesce at random
+      coalescence <- sample(activeNodes, 2)
+
+      if (debug)
+         cat("After ", t, "generations: Nodes ", coalescence[1], " and ", coalescence[2], "coalesce\n")
+
+      # assign their parental nodes
+      parent[coalescence] = nextNode
+
+      # remove these from the list of active nodes
+      activeNodes <- setdiff(activeNodes, coalescence)
+
+      # create a new node
+      parent[nextNode] <- 0
+      lengths[nextNode] <- 0
+      descendants[nextNode] <- descendants[coalescence[1]] + descendants[coalescence[2]]
+
+      # And update list of active nodes
+      activeNodes <- c(activeNodes, nextNode)
+
+      nextNode <- nextNode + 1
+      }
+
+  list(descendants = descendants, parent = parent, lengths = lengths)
+  }
+
+```
+```{r}
+SingleLocusTree(n=10,debug=TRUE)
+```
+```{r}
+GetTreeSpectrum <- function(tree, n)
+  {
+  spectrum <- rep(0, n)
+
+  for (i in 1:length(tree$descendants))
+      spectrum[tree$descendants[i]] <- spectrum[tree$descendants[i]] + tree$lengths[i]
+
+  spectrum
+  }
+
+```
+```{r}
+n <- 10
+   spectrum <- rep(0, n)
+ 
+   for (i in 1:100)
+      {
+      tree <- SingleLocusTree(n)
+      spectrum <- GetTreeSpectrum(tree, n) + spectrum
+      }
+
+   spectrum <- spectrum / 100
+
+```
+A wild attempt to load sample_stats
+```{r}
+dyn.load("sample_stats.so")
+```
+So that loaded sample stats into the world.  Now we need to figure out how to use it.  A .C call?

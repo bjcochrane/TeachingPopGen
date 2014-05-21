@@ -1,7 +1,9 @@
 ## Basic read function
 library(XML)
 library(stringr)
-read.alfred <-function(the.url){
+read.alfred <-function(siteid){
+  url <-"http://alfred.med.yale.edu/alfred/SiteTable1A_working.asp?siteuid="
+  the.url <-paste(url,siteid,sep="")
   dat.region <- readHTMLTable(the.url,which=3)
   dat.region <-dat.region[-(1:2),]
   test <-as.numeric(str_sub(dat.region$V3,start=1,end=2))
