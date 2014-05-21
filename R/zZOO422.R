@@ -171,7 +171,6 @@ read.ms.output <- function( txt=NA, file.ms.output=NA ) {
 }
 MK <-function(NS,SS){
 cont <-rbind(NS,SS)
-cont
 print(chisq.test(cont,correct=FALSE))
 FI <-(NS[2]*SS[1])/(NS[1]*SS[2])
 FI
