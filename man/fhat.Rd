@@ -20,17 +20,13 @@ A vector containing numbers of alleles in sample
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Returns the sum of the squared allele frequencies, or the expected homozygosity of the sample assuming it is drawn from a Hardy-Weinberg Population
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Bruce J. Cochrane
 }
 \note{
 %%  ~~further notes~~
@@ -42,9 +38,9 @@ A vector containing numbers of alleles in sample
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+allele.numbers <- c(12,3,4,6,2,1)
+out.fhat <-fhat(allele.numbers)
+out.fhat
 
 ## The function is currently defined as
 function (dist) 
