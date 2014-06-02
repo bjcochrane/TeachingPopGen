@@ -8,9 +8,9 @@ read.hapmap.genotype <- function (file){
   dat.hap <-dat.hap[,-c(1:10)] # remove extraneous columns
   dat.hap <-t(dat.hap)#transpose
   # now apply the genetics function to the columns and make into a data frame.
-  dat.genotype <-lapply(c(1:ncol(dat.hap)),function (x) genotype(dat.hap[,x],sep=""))
-  dat.genotype <-data.frame(dat.genotype)
-  colnames(dat.genotype) <-colnames(dat.hap)
+  dat.genotype <-makeGenotypes(data.frame(dat.hap),sep="")
+  #dat.genotype <-data.frame(dat.genotype)
+  #colnames(dat.genotype) <-colnames(dat.hap)
   dat.out <-list(dat.genotype,dat.pos)
   names(dat.out) <-c("Genotypes","Chromosomal Position")
   dat.out
