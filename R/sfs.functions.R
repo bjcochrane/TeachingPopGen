@@ -26,7 +26,7 @@ pi <-function(dat){
 theta.W <-function(dat){
   dat.ms <-dat[[2]]
   s <-sum(dat.ms)
-  n <-dat[[1]]-1
+  n <-dat[[1]]
   ivec <-c(1:(n-1)) # create the vector of 1 to n-1
   a <-sum(1/ivec)
   th <-s/a
@@ -34,7 +34,7 @@ theta.W <-function(dat){
 }
 # Then, with all of the above, we can write a tajima test function
 
-taj <-function(dat){
+taj<-function(dat){
   dif <-pi(dat)-theta.W(dat)
   n <-dat[[1]]
   s <-sum(dat[[2]])
