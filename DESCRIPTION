@@ -1,9 +1,10 @@
 Package: TeachingPopGen
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2014-05-10
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Functions to facilitate a course in Population Genetics
+Version: 0.5
+Date: 2014-07-23
+Author: Bruce Cochrane
+Maintainer: Bruce Cochrane <cochrabj@miamioh.edu>
+Description: Provides a variety of functions useful for students and instructors in introductory population genetics courses.
+Depends:  ape,pegas,stringr,phyclust
+License: GPL-3
