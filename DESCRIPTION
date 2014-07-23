@@ -6,5 +6,5 @@ Date: 2014-07-23
 Author: Bruce Cochrane
 Maintainer: Bruce Cochrane <cochrabj@miamioh.edu>
 Description: Provides a variety of functions useful for students and instructors in introductory population genetics courses.
-Depends:  ape,pegas,stringr,phyclust
+Depends:  ape,pegas,stringr,phyclust,XML
 License: GPL-3
