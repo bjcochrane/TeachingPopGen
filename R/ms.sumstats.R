@@ -2,7 +2,9 @@
 #requires use of read.ms.output to process raw ms file
 # input to function is then ms.out$gametes
 # Demonstrates that the entire analysis derives from the site frequency spectrum
-ms.sumstats <-function(gametes){
+ms.sumstats <-function(ms.raw){
+  dat <-read.ms.output(ms.raw)
+  gametes <-dat$gametes
   sf <-lapply(gametes,sfs,pl=FALSE) # Get the site frequency spectra
   S <-sapply(sf,function (x) sum(x[[2]]))
   pi <-sapply(sf,pi)
