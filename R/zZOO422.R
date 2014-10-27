@@ -154,7 +154,7 @@ read.ms.output <- function( txt=NA, file.ms.output=NA ) {
 		 gamlist[[draw]] <- h
         stopifnot(all(dim(h) == c(nsam, segsites[draw]))) 
     }
-	cat("\n")
+#	cat("\n")
     list(segsites=segsites, gametes=gamlist, probs=probs, times=t(times), positions=positions, nsam=nsam, nreps=ndraws ) 
 }
 MK <-function(NS,SS){
