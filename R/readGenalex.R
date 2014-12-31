@@ -14,7 +14,7 @@ read.genalex <-function(filename, missing=0){
   popsize <-param[4:(4+npop-1)] # extract population numbers
   Population <-lapply(1:npop, function(x) rep(x,popsize[x])) # create vector of factors
   levels.dat <-factor(unlist(Population))
-  if(param[4+npop]!=1){ # if loop to see if regions are specified
+  if(length(param)>(3+npop)){ # if loop to see if regions are specified
     nreg <-param[(npop+4)]
     regsize <-param[(npop+5):(5+npop+nreg-1)]
     regfac <-lapply(1:nreg,function(x) rep(x,regsize[x]))
