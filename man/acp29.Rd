@@ -1,7 +1,7 @@
 \name{acp29}
 \alias{acp29}
 \docType{data}
-\title{
+\title{acp29 Sequences
 %%   ~~ data name/kind ... ~~
 }
 \description{
