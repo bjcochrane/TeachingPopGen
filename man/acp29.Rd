@@ -1,5 +1,5 @@
 \name{acp29}
-\alias{acp29}
+\alias{acp29.seq}
 \docType{data}
 \title{acp29 Sequences
 %%   ~~ data name/kind ... ~~
