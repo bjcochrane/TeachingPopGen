@@ -1,7 +1,7 @@
 \name{acp29}
 \alias{acp29}
 \docType{data}
-\title{
+\title{DN Sequences, ACP29 From \emph{Drosophilla melanogaster}
 %%   ~~ data name/kind ... ~~
 }
 \description{
