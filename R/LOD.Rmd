@@ -1,0 +1,21 @@
+---
+title: "Lod Score Work"
+output: html_document
+---
+Using problem 30, and figuring that there are 15 parentals and two recombinants; furthermore, the probability of getting the disease associated allele in the absence of linkage is 3/4.
+```{r}
+th <-seq(0.01,.5,.02)
+```
+Now try a simple calculation, say with theta = .1, and then go back and substitute in the vector
+```{r}
+lod <-function(th) {
+  out <-((1-th)^15*th^2)/(3/4)^17
+  log10(out)
+}
+```
+
+```{r}
+plot(th,lod(th))
+abline(h=3,col="red")
+```
+
