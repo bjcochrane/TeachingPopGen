@@ -9,6 +9,7 @@ Description: Provides a variety of functions useful for students and instructors
 Depends: ape,pegas,stringr,phyclust,XML
 Suggests: knitr
 VignetteBuilder: knitr
+LazyData: true
 License: GPL-3
 
 
