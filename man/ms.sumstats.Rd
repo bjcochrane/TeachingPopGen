@@ -52,6 +52,7 @@ Bruce Cochrane \email{cochrabj@miamioh.edu}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+   \code{\link[phyclust]{ms}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
