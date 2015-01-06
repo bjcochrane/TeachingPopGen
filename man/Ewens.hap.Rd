@@ -5,7 +5,7 @@
 Ewens Test for Hapmap Data
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Wrapper to input haplotype data from hapmap into \code{Ewens}
 }
 \usage{
 Ewens.hap(dat)
@@ -40,6 +40,8 @@ Ewens.hap(dat)
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{Ewens}},
+\code{\link{fhat}}
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
