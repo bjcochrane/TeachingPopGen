@@ -1,0 +1,14 @@
+---
+title: "Introduction to Teaching Population Genetics"
+author: "Bruce J. Cochrane"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Teaching Population Genetics}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+### Overview
+
+---
+### How to proceed
