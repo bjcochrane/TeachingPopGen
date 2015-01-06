@@ -1,0 +1,17 @@
+---
+title: "Working with Genalex"
+author: "Bruce Cochrane"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with Genalex}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+### Introduction
+
+### Obtaining a file
+
+### File Conversion
+
+### Calculating F Statistics

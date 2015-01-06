@@ -1,0 +1,19 @@
+---
+title: "Using ALFRED"
+author: "Btruce J. Cochrane"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using ALFRED}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+### Introduction
+
+### Finding a SNP
+
+### Reading Data into R
+
+### Aggregating Data
+
+### Calculating F Statistics
