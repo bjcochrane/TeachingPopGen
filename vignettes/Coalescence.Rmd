@@ -1,58 +1,96 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Coalescent Simulation and Application"
+author: "Bruce J Cochrane"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Coalescent Simulation and Application}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
+### Introduction
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+Inference based on inferred gene genealogies is one of the most important aspects of modern population genetics, however it is one that is among the most difficult for students to appreciate.  The theoretical basis, originating with Kingman (1982) has been thoroughly summarized (e. g. Hein, 2005; Wakeley, 2008); in essence, it is based on the idea that, given a sample of alleles, if one looks backward in time, eventually they “coalesce” on a most recent common ancestor (MRCA).    The dynamics of that process are determined by population size (N) and mutation rate (µ); the question we wish to address is, given an observed set of DNA sequences, can their pattern of diversity be explained by a neutral coalescent process?
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+What follows is based largely on use of the canonical coalescent simulation package **ms** (Hudson, 1991).  [The documentation for that program](https://webshare.uchicago.edu/users/rhudson1/Public/ms.folder/msdoc.pdf?ticket=t_DunQ7c99) is an essential first step.  The program is written in C and can be readily compiled and run from the command line under either Linux or Mac (and with some pain under Windows). Fortunately, however, it has been incorporated into the R package **phyclust**, which is loaded as a dependency by TeachingPopGen.  In addition, Hudson's basic distribution of ms includes an R script that converts the raw output of ms into a list, amenable to further analysis in R.
 
-## Vignette Info
+### Simulations
 
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+The goal of coaelescent simulation is to find a set of parameters, involving mutation rate and population size (&theta;), population history, recombination rates, etc., that best explain the distribution of nucleotide sequence variation in a real data set of interest.  Specifying these parameters can get quite complex; we will limit our analysis for now to working with a minimum number of them:
 
-## Styles
+* number of sequences in the sample (nsam)
+* number of simulations to perform (nreps)
+* theta (-t, the neutral parameter 4Ne&mu;)
+* Number of segregating sites (-s)
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+Note that at a minimum, nsam, nreps, and *either* -s or -t must be specified.  
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+The format of the basic call to ms (as implemented in phyclust) is
 
-## Figures
+ms(nsam=k, nreps=n,opts=c("-t ..."))
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+where k and n are user-specified numbers, and opts is a character vector specifying other paramters to be passed to ms.
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+#### Basic simulations
+
+##### Fixed value of &theta;
+
+We can start by running a single simulation of the evolution of 10 sequences setting &theta; = 3 (a biologically meaningful number):
+```{r}
+set.seed(1234)
+sim1 <-ms(nsam=10,nreps=1,opts=c("-t 3"))
+sim1
+```
+We see that we get what is essentially character output, containing the following:
+
+1. The call made to ms (written in the format we would use from the command line).
+2.  a line containing "//"
+3.  The number of segregating sites (10 in this case)
+4.  The relative positions of those sites
+5.  10 lines containing the simulated sequences, where zeros connote ancestral alleles and 1 indicates derived ones (the result of mutation in the gene geneology)
+
+Note that in this format, the utility of the output for further analysis is limited.  This is where the read.ms.output function can come in - it will convert raw ms output into a list.  However, since this function is embedded in the various analytical progams in the package, we needn't concern ourselves with it at this point.
+
+Finally, since we set &theta; as the only input option, the number of segregating sites among repeated simulations will vary.  This will become important down the road.
+
+##### Fixed value of segregating sites
+
+A second choice (one often used in real data analysis) is to input the number of segregating sites.  This is something that could be determined from real data.  For example, we can look at a data set for the *acp29* locus from *Drosophila melanogaster*.  to do so, we will use the seg.sites(function) from the package **pegas** (a dependency of TeachingPopGen)
+
+```{r}
+data(acp29)
+n.sites <-length(seg.sites(acp29))
+n.seq <-length(acp29)
+n.seq;n.sites
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+This tells us that there are a total of 17 sequences and 15 segregating sites; we can use these values in an ms simulation as follows:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+```{r}
+sim2 <-ms(nsam=17,nreps=1,opts=c("-s 15"))
+sim2
+```
+Again we get similar output.  However, in this case, repeated simulations would always contain 15 segregating sites.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+#### Using the -T option
 
-## More Examples
+As noted earlier, there are lots of parameters that can be specified as options for ms.  One particularly valuable one is the -T option.  We can repeat our simulation based on the *acp* data accordingly and examine the first three lines of the output:
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+sim3 <-ms(nsam=17,nreps=1,opts=c("-s 15 -T"))
+head(sim3,3)
+```
+The third line is the simulated tree, coded in Newick format.  We can then plot it as follows, using the read.tree function from **ape**:
+```{r,fig.height=5}
+tr <-read.tree(text=sim3)
+plot(tr)
 ```
 
-Also a quote using `>`:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+Note that the default condition for read.tree is to read from a file; use of the text= parameter specifies reading of an R object.
+
+#### Summarizing multiple simulations
+
+#### 
+
+### Application
