@@ -2,7 +2,10 @@
 title: "Introduction to Teaching Population Genetics"
 author: "Bruce J. Cochrane"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette
+
+
 vignette: >
   %\VignetteIndexEntry{Introduction to Teaching Population Genetics}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,5 +13,26 @@ vignette: >
 ---
 ### Overview
 
+In a typical undergraduate biology curriculum, it is in the area of genetics that undergraduates are first confronted with problems requiring quantitative reasoning.  While initially these are fairly straightforward (e. g. working with Mendelian ratios in relatively simple controlled crosses), more challenging ones quickly follow, as the subject matter moves on to such subjects as linkage and recombination, pedigree analysis, and population genetics.  
+
+Population genetics, which, following Hartl and Clark(2007), we can define as the application of Mendelian principles across populations of organisms, is particularly challenging.  Although the field has a long historical tradition (Provine,1974), it has tended to be a field in which there was a surfeit of theory, but a relative paucity of data.  .  As a result, its treatment in undergraduate texts in both Genetics and Population Genetics tend to consist of analytical approaches leading to complex formulae, which, by virtue of the limited available amount of applicable data, had no evident real world application.
+
+With the advent of genomics, and particularly with the explosive growth in sequence data resulting from next generation sequencing (NGS), the landscape has changed.  Theoretical advances continue, but they do so in what is now a data-rich environment.  Furthermore, they do so in a world in which access to sophisticated computational resources is ubiquitous.  As a result, I suggest that we need to rethink our pedagogical approach to population genetics, by minimizing our reliance on purely analytical solutions and instead using numerical methods to both simulate real scenarios and assess available data.
+
+In what follows, I proceed from some basic premises:
+
+1.  The starting point for all problems should be based on a meaningful evolutionary question
+2.   In developing hyotheses and expectations regarding these questions, while an analytical foundation is necessary, appropriate simulation provides a more meanngful learning context.
+3.   Once a suitable model has been developed, analysis of data becomes more straightforward and meaningful.  
+
+The amount of standalone software available to perform population-genetic analyses, either with respect to simulation or to real data analysis, is simply staggering.  This creates a number of practical problems.  First, each package has its own set of requirements vis-a-vis data type and structure.
 ---
 ### How to proceed
+
+The TeachingPopGen Package consists of functions designed to assist students with a number of tasks.  Among them are
+
+1.  Working with basic population genetics, particularly Hardy-Weinberg calculations and linkage disequilibrium.
+2.  Performing coalescent simulations and using them to test hypotheses about the evolutionary history of real DNA sequence data sets
+3.  Accessing and manipulating data from online sources, primarily HapMap, GenBank, ALFRED and Dryad.
+
+Separate vignettes are available for each of these topics.

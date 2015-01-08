@@ -1,6 +1,6 @@
 ---
 title: "Using ALFRED"
-author: "Btruce J. Cochrane"
+author: "Bruce J. Cochrane"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
