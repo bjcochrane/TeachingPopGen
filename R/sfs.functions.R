@@ -5,8 +5,9 @@
 ## Input is one raw run to function sfs; it will then be called from pi etc.
 
 sfs <-function(dat,pl=TRUE){
- dat.ms <-read.ms.output(txt=dat)
- gams <-dat.ms$gametes[[1]]
+# dat.ms <-read.ms.output(txt=dat)
+# gams <-dat.ms$gametes[[1]]
+gams <-dat
   dist <-apply(gams,2,sum)
   n <-nrow(gams)
   h <-hist(dist, breaks=c(0:(n-1)),plot=FALSE)

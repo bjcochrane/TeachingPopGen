@@ -31,9 +31,9 @@ ms(nsam=k, nreps=n,opts=c("-t ..."))
 
 where k and n are user-specified numbers, and opts is a character vector specifying other paramters to be passed to ms.
 
-#### Basic simulations
+##### Basic simulations
 
-##### Fixed value of &theta;
+#### Fixed value of &theta;
 
 We can start by running a single simulation of the evolution of 10 sequences setting &theta; = 3 (a biologically meaningful number):
 ```{r}
@@ -53,7 +53,7 @@ Note that in this format, the utility of the output for further analysis is limi
 
 Finally, since we set &theta; as the only input option, the number of segregating sites among repeated simulations will vary.  This will become important down the road.
 
-##### Fixed value of segregating sites
+#### Fixed value of segregating sites
 
 A second choice (one often used in real data analysis) is to input the number of segregating sites.  This is something that could be determined from real data.  For example, we can look at a data set for the *acp29* locus from *Drosophila melanogaster*.  to do so, we will use the seg.sites(function) from the package **pegas** (a dependency of TeachingPopGen)
 
@@ -88,6 +88,21 @@ plot(tr)
 
 
 Note that the default condition for read.tree is to read from a file; use of the text= parameter specifies reading of an R object.
+
+##### A few simple analyses
+
+#### Unfolded site frequency spectrum
+
+While actual visualization of site frequency spectra is rarely a part of a formal coalescence analysis, it is important to understand what one is and how it forms the underpinning of muxh of coalescence theory (notably the Tajima test).  The following simple function will provide us with both a numerical and graphical depiction of the unfolded site frequency spectrum of ms results (note that pl=TRUE is the default condition; if pl=FALSE is specified, then only the numeric output is returned)
+
+```{r}
+ss <-sfs(sim1,pl=TRUE)
+ss
+```
+#### Computing &pi;
+
+Remembering that &pi; the average number of pairwise differences between sequences, is an estimator of &theta;, in cases where ()
+
 
 #### Summarizing multiple simulations
 
