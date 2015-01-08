@@ -93,19 +93,61 @@ Note that the default condition for read.tree is to read from a file; use of the
 
 #### Unfolded site frequency spectrum
 
-While actual visualization of site frequency spectra is rarely a part of a formal coalescence analysis, it is important to understand what one is and how it forms the underpinning of muxh of coalescence theory (notably the Tajima test).  The following simple function will provide us with both a numerical and graphical depiction of the unfolded site frequency spectrum of ms results (note that pl=TRUE is the default condition; if pl=FALSE is specified, then only the numeric output is returned)
+While actual visualization of site frequency spectra is rarely a part of a formal coalescence analysis, it is important to understand what one is and how it forms the underpinning of muxh of coalescence theory (notably the Tajima test). It is possible, using the following code, to display an unfolded site frequency spectrum, however this function is included mainly to be used in other functions (pi, thetaW, etc)
 
+To display the sfs for our acp29-based simulation, we can proceed as folows
 ```{r}
-ss <-sfs(sim1,pl=TRUE)
+sim3.ms <-read.ms.output(sim3) #converts output to a list
+gametes <-sim3.ms$gametes[[1]] #extract the gametes from that list
+ss <-sfs(gametes,pl=TRUE)
 ss
 ```
-#### Computing &pi;
 
-Remembering that &pi; the average number of pairwise differences between sequences, is an estimator of &theta;, in cases where ()
+
+#### Computing &pi; &theta;w; and the Tajima statistic
+
+Remember that, given a data set, we can estimate &theta; based on either the average pairwise nucleotide differences per sequence (&pi;) or on the number of segregating sites (&theta;w, the Watterson estimator).  These can now be calculated as follows
+
+```{r}
+pi.sim <-pi(ss)
+th.sim <-theta.W(ss)
+taj.sim <-taj(ss)
+c(pi=pi.sim,theta=th.sim,D=taj.sim)
+```
+In fact, the function **ms.sumstats** does all of the above and then some - it takes raw ms output and calculates a number of statistics, as we can see:
+
+```{r}
+sim3.ss <-ms.sumstats(sim3)
+sim3.ss
+```
+In addition to the aforementioned statistics, it also returns Fay and Wu's estimator of theta, as well as their H statistic - two measures of theta that are based on the frequency distributions of derived vs. ancestral alleles - something we will return to when we consider natural selection.
+
+But what does this tell us?  By itself, practically nothing.  If we were to repeat the process, we would get different results - after all, this is a random simulation.  But therein lies the power of simulation, and is where we will go next.
 
 
 #### Summarizing multiple simulations
 
-#### 
+Up until now, we have been working with one sample at a time.  But remember, the nsam parameter allows us to run multiple simulations, in which case we could obtain summary statistics for all of them, look at their distributions, and compare those distributions to statistics derived from our data of interest.  This is in fact a very straightforward process.  
 
-### Application
+To illustrate, let's return to our first set of conditions, in which we simulated evolution of 10 sequences assuming that &theta; is 3.  Now, however, let's do 1000 replicates and calculate the summary statistics
+
+```{r}
+sim5 <- ms(nsam=10,nreps=1000, opts="-t 3")
+sim5.ms <-ms.sumstats(sim5)
+head(sim5.ms)
+```
+We can then look, both numerically and graphically, at whichever of these we wish.  For example, we can make rough plots of the distributions of S and D, highlighting the upper and lower tails:
+
+```{r,fig.show='hold'}
+colhist(sim5.ms$S,labs=c("S","Number","Segregating Sites"))
+colhist(sim5.ms$Tajima.D,lab=c("D","Number","Tajima's D"))
+```
+
+Alternatively, we can look at this numerically:
+```{r}
+c(mean.S=mean(sim5.ms$S),quantile(sim5.ms$S,c(.025,.975)))
+c(mean.D=mean(sim5.ms$Tajima.D,na.rm=TRUE),quantile(sim5.ms$Tajima.D,c(.025,.975),na.rm=TRUE))
+```
+
+
+### Application to data
