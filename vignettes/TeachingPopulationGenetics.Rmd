@@ -26,6 +26,8 @@ In what follows, I proceed from some basic premises:
 3.   Once a suitable model has been developed, analysis of data becomes more straightforward and meaningful.  
 
 The amount of standalone software available to perform population-genetic analyses, either with respect to simulation or to real data analysis, is simply staggering.  This creates a number of practical problems.  First, each package has its own set of requirements vis-a-vis data type and structure.
+
+
 ---
 ### How to proceed
 
