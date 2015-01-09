@@ -214,4 +214,4 @@ post.D <-as.numeric(sim7.post$Tajima.D)
 colhist(post.D)
 c(mean.D=mean(post.D),quantile(post.D,c(.025,.975)))
 ```
-
+So what does this tell us?  In all likelihood, our sole prior assumption, that &theta; is drawn from U(0,20) is not sufficient as an evolutionary model.  Other factors, such as variation in effective population size, population subdivision, and/or natural selection, have quite likely been contributing factors. Indeed, per the multilocus analysis of [Legrand et al. (2011)](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2011.05127.x/abstract) these sequences were derived from separate populations tha have undegone minimal historical gene flow.  Addressing these more complex models requires more sophisticated analytical tools (e. g. Markov Chain Monte Carlo methods) that lie beyond the scope of this package.
