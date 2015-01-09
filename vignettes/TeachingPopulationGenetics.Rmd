@@ -25,7 +25,47 @@ In what follows, I proceed from some basic premises:
 2.   In developing hyotheses and expectations regarding these questions, while an analytical foundation is necessary, appropriate simulation provides a more meanngful learning context.
 3.   Once a suitable model has been developed, analysis of data becomes more straightforward and meaningful.  
 
-The amount of standalone software available to perform population-genetic analyses, either with respect to simulation or to real data analysis, is simply staggering.  This creates a number of practical problems.  First, each package has its own set of requirements vis-a-vis data type and structure.
+The amount of standalone software available to perform population-genetic analyses, either with respect to simulation or to real data analysis, is simply staggering.  This creates a number of practical problems.  First, each package has its own set of requirements vis-a-vis data type and structure.  Second, while many programs can be implemented on multiple platforms (some combination of Windows, Mac and Linux), others cannot.  Finally, some of the most powerful programs must be executed from the command line, requiring  a  knowledge of both the basics Unix and the often arcane command and file structure associated with particular programs.  These are problems that greatly complicate the learning environment
+
+### The Philosophy of TeachingPopGen
+
+This package has been developed in conjunction with an upper level class in Evolutionary and Population Genetics taught at Miami University.  Students in the class (advanced undergraduates and beginning graduate students).  Since their experience with coding and data retrieval and analysis varies greatly, the goal has been to make user input as straightforward as possible.  This means that 
+
+1.  Meaningful results must be attainable with a minimum of coding by the user.
+2  Data structures are kept simple - by and large, they are limited to generic vectors, matrices, dataframes and lists.
+
+Next, there has been the question of what to include in terms of functional capability.  Here, I have proceeded from an "add as needed" philosophy.  So, for example, an obvious place to start is with basic Hardy-Weinberg calculations.  While there are some sophisticated routines for doing them in other packages (notably `HardyWeinberg` and `genetics`), the TPG function `hw` was written to do only the basics - take single locus biallelic genotype numbers and return allele frequencies, expected genotype numbers, and a basic chi-square test for departure from HW expectations.  At the other end of the spectrum, functions have been written that are designed to help students apply complex analytical methods (for example coalescent simulation and extended homozygosity analysis) without having to get bogged down in mathematical and data management minutiae. 
+
+#### How Much Coding is Needed?
+
+First of all, note that this package has been developed in [RStudio](http://www.rstudio.org) and is designed to run in that environment (although most of the functions should work equally well either in standalone R or in another IDE).  
+
+So in that context, the goal has been to designed functions that can be accessed with a small suite of base R functions, such as
+
+* those involved in vector creation and manipulations
+* plotting functions (from Base R rather than ggplot or lattice)
+*  the `apply` family of functions.  Note that these are not used often, but in some circumstances they are simply too powerful to ignore.
+
+Similarly, with appropriate use of data preparation functions, users should only have to be conversant with vectors, matrices, data frames and lists; similarly most data are either numerical or character string (most use of logicals is limited to function calls).
+
+Beyond these minima, of course, the user is free to invoke the full panoply of R capabilities to further explore questions of interest.  Again, the goal has been to keep data structures simple, so that further manipulations are relatively straightforward.
+
+Finally, at present, most functions access data from local files, rather than directly from the web.  This may change in the future, but for now, prior use of web resources like [Genbank](http://www.ncbi.nlm.nih.gov), [HapMap](http://www.hapmap.org) and [Dryad](http://www.datadryad.org) is required, and in some cases, processing tabular data in Excel or some other spreadsheet program is required.
+
+
+#### Package Dependencies
+
+In point of fact, there is much already available in the R world (primarily on CRAN, to a lesser extent on BioConductor) that is quite useful.  Thus, rather than reinvent the wheel, several packages are established as dependencies when TeachingPopGen is installed.  While use of dependencies is sometimes discouraged, in this case it offers a couple of advantages.  First of all, it obviates the need to reinvent the wheel - many of the functions from these packages (particularly **ape** and **pegas**) are quite useful, both for internal use within package functions and for use by the end user.  Brief descriptions of package dependencies are below:
+
+* [ape](http://ape-package.ird.fr/)  This is sort of a swiss army knife of phylogenetic analysis functions and is well worth exploring on its own.  It is particularly useful with respect to visualization of phylogenies
+* [pegas](http://ape.mpl.ird.fr/pegas/) This package complements ape by providing numerous functions for analysis of DNA sequence data.
+* [phyclust](http://thirteen-01.stat.iastate.edu/snoweye/phyclust/)  This is the source of the `ms` function, one used extensively in coalescent simulation and analysis
+
+The following two packages are used internally by some of the TPG functions; their use is usually invisible to the TPG user.
+
+* stringr - a package that simplifies character string manipulation
+* XML - a workhorse for accessing and parsing XML data.
+
 
 
 ---
@@ -37,4 +77,6 @@ The TeachingPopGen Package consists of functions designed to assist students wit
 2.  Performing coalescent simulations and using them to test hypotheses about the evolutionary history of real DNA sequence data sets
 3.  Accessing and manipulating data from online sources, primarily HapMap, GenBank, ALFRED and Dryad.
 
-Separate vignettes are available for each of these topics.
+Separate vignettes are available for each of these topics.  In addition, entering ?TeachingPopGen
+
+### References
