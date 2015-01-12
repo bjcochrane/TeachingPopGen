@@ -12,7 +12,7 @@ pi(dat)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dat}{ output from function \sfs
+  \item{dat}{ output from function \code{sfs}
 %%     ~~Describe \code{dat} here~~
 }
 }
@@ -32,7 +32,7 @@ pi(dat)
 }
 \author{Bruce J. Cochrane \email{cochrabj@miamioh.edu}}
 %%  ~~who you are~~
-}
+
 \note{
 %%  ~~further notes~~
 }
@@ -66,7 +66,4 @@ function (dat)
     return(pi2)
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
