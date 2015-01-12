@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
-```{r}
+```{r,results='hide',echo=FALSE}
 library(TeachingPopGen)
 ```
 
