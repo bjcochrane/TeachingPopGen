@@ -23,7 +23,7 @@ Data will be loaded as acp29.seq in the list format .  It can then be used to pe
 }
 \examples{
 data(acp29)
-acp29.seq #displays basic data
+acp29 #displays basic data
 image.DNAbin(as.matrix(acp29.seq))  # visualize aligned sequences
 tajima.test(acp29.seq) #perform Tajima's test for departure from neutral predictions
 }
