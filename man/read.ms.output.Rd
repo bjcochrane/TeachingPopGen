@@ -61,8 +61,7 @@ set.seed(123)
 dat <-ms(nsam=100,nreps=2,opts=c("-s 51 -t 10 -L -T"))
 dat.ms <-read.ms.output(dat)
 str(dat.ms)
-
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 
-\keyword
