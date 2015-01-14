@@ -8,9 +8,6 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
-```{r,results='hide',echo=FALSE}
-library(TeachingPopGen)
-```
 
 ### Introduction
 
@@ -40,6 +37,11 @@ where k and n are user-specified numbers, and opts is a character vector specify
 #### Fixed value of &theta;
 
 We can start by running a single simulation of the evolution of 10 sequences setting &theta; = 3 (a biologically meaningful number):
+
+```{r,results='hide',echo=FALSE}
+library(TeachingPopGen)
+```
+
 ```{r}
 set.seed(1234)
 sim1 <-ms(nsam=10,nreps=1,opts=c("-t 3"))
