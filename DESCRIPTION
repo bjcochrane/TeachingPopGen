@@ -6,7 +6,7 @@ Date: 2015-01-01
 Author: Bruce Cochrane
 Maintainer: Bruce Cochrane <cochrabj@miamioh.edu>
 Description: Provides a variety of functions useful for students and instructors in introductory population genetics courses.
-Depends: ape,pegas,stringr,phyclust,XML
+Depends: ape,pegas,stringr,phyclust,XML,RCurl
 Suggests: knitr
 VignetteBuilder: knitr
 LazyData: true
