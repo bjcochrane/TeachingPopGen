@@ -12,21 +12,11 @@ read.https(url, header = TRUE, sep = ",", quote = "\"", dec = ".", fill = TRUE, 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-<<<<<<< HEAD
 \item{url}{:  url of data source; tested on public links from Dropbox and Google Drive}
 =======
-\item{url}
-{\code{character} - url of data source; tested on public links from Dropbox and Google Drive
->>>>>>> 0c31448d599a478330cd4188de0b8957614a40b5
-%%     ~~Describe \code{url} here~~
-}
- 
- 
-<<<<<<< HEAD
+\item{url}{\code{character} - url of data source; tested on public links from Dropbox and Google Drive}
 
-=======
 }
->>>>>>> 0c31448d599a478330cd4188de0b8957614a40b5
 \details{
 Other paramters are described in the documentation for \code{\link{read.table}}.  Default values are those of \code{\link{read.csv}}.
 }
