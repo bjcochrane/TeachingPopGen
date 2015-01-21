@@ -86,8 +86,8 @@ chi <-sum((obs-exp)^2/exp)
 pr <-1-pchisq(chi,df)
 chi <-round(chi,2)
 pr <-round(pr,2)
-out <-cat(paste("chi-square = ",chi), paste("probability(<.05) = ",pr), paste("deg. freedom = ",df),sep="\n")
-out
+out <- data.frame(chi.sq=chi,prob=pr,d.f.=df)
+ out 
 }
 
 # The following uses input from read.HapMap.data in chopsticks and returns a file formatted as saving for csv input into Genalex
