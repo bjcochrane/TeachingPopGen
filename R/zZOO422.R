@@ -157,9 +157,9 @@ read.ms.output <- function( txt=NA, file.ms.output=NA ) {
 #	cat("\n")
     list(segsites=segsites, gametes=gamlist, probs=probs, times=t(times), positions=positions, nsam=nsam, nreps=ndraws ) 
 }
-MK <-function(NS,SS){
-cont <-rbind(NS,SS)
-print(chisq.test(cont,correct=FALSE))
-FI <-(NS[2]*SS[1])/(NS[1]*SS[2])
-FI
+MK <-function(Div,Poly){
+  tbl <-rbind(Div,Poly,correct=TRUE)
+  ch <-chisq.test(tbl)
+  FI <-(Div[1]*Poly[2])/(Div[2]*Poly[1])
+  list(ch,FI)
 }
