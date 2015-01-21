@@ -2,6 +2,7 @@
 ## min sets the limit for eliminating snps with fewer than n represenatatives in any genotype class.
 datprep <-function(dat,min=5){
   genos <-cbind(dat$V13,dat$V16,dat$V19)
+  genos <-data.frame(genos)
   rownames(genos) <-rownames(dat)
   colnames(genos) <-c("AA","Aa","aa")
   
