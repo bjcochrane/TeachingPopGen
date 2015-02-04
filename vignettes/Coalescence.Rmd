@@ -38,7 +38,7 @@ where k and n are user-specified numbers, and opts is a character vector specify
 
 We can start by running a single simulation of the evolution of 10 sequences setting &theta; = 3 (a biologically meaningful number):
 
-```{r,results='hide',echo=FALSE}
+```{r,results='hide',echo=FALSE,message=FALSE}
 library(TeachingPopGen)
 ```
 

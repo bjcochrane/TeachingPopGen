@@ -12,13 +12,13 @@ Fis(genos, freq = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{genos} - {\code{vector}:  Either numbers or frequencies of genotypes in standard order
+  \item{genos}{Either numbers or frequencies of genotypes in standard order (\code{vector})}
 %%     ~~Describe \code{genos} here~~
-}
-  \item{freq} - {\code{logical}:  \code{TRUE} (default) for frequency data.  \code{FALSE} for genotype numbers
+
+  \item{freq}{\code{TRUE} (default) for frequency data.  \code{FALSE} for genotype numbers}
 %%     ~~Describe \code{freq} here~~
 }
-}
+
 \details{  Given three genotypes of a biallelic locus (either frequency or numbers), the function calculates F and returns it.
 %%  ~~ If necessary, more details than the description above ~~
 }
