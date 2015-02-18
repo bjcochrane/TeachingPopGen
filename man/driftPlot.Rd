@@ -8,7 +8,7 @@ Simulate Genetic Drift
 Simulates random drift, plotting changes in allele frequencies and returning them as a matrix
 }
 \usage{
-driftPlot(N, nreps = 10)
+driftPlot(N, nreps = 10, p = 0.5, print = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,18 +18,20 @@ A vector of population sizes
   \item{nreps}{
 Number of replicate simulations to be performed
 }
+  \item{p}{Initial allele frequency}
+  \item{print}{if TRUE, display graphical output}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-simulated values of p, in which rows are generations and columns are replicates
+Matrix of simulated values of p, in which rows are generations and columns are replicates
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Bruce J. Cochrane
+Bruce J. Cochrane \email{cochrabj@miamioh.edu}
 }
 \note{
 %%  ~~further notes~~
@@ -38,6 +40,7 @@ Bruce J. Cochrane
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+\code{\link{fixtime}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
