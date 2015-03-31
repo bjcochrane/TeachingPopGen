@@ -1,0 +1,32 @@
+deltaP <-function (pinit, w11,w12,w22,ngen=100,plot=TRUE,out=FALSE){
+  p <-c(pinit,rep(0,ngen-1)) # create vector for p
+  dpg <-c(0,rep(0,ngen-1)) # create vector for ∆p
+  for(i in 2:ngen){
+    pt <-p[i-1]
+    qt <-1-pt
+    w <-c(w11,w12,w22) # make vector of given fitnesses (could be anything)
+    wrel <-w/max(w) # normalize to maximum 
+    wbar <-pt^2*wrel[1]+2*pt*qt*wrel[2]+qt^2*wrel[3] # calculate mean fitness
+    a <-(pt*(wrel[1]-wbar))+(qt*(wrel[2]-wbar))
+    dpg[i] <-pt*(a/wbar)
+    p[i] <-pt+dpg[i]
+  }
+  # now need to determine dp against p for p=0 to 1
+  p2 <-seq(0,1,.01); q2=1-p2
+  # calculate wbar for each value
+  wbar2 <-p2^2*wrel[1]+2*p2*q2*wrel[2]+q2^2*wrel[3]
+  a <-(p2*(wrel[1]-wbar2))+(q2*(wrel[2]-wbar2)) # calculate fitness advantage for each p
+  dp <-p2*(a/wbar2) # calculate delta p for each value
+  if (plot){
+    par(mfrow=c(3,1))
+    plot(p,type="l",ylim=c(0,1),col="blue",xlab="Generation",ylab="p",main="Allele Frequencies vs. Time")
+    lines(1-p,col="red")
+    plot(p2,wbar2,type="l",xlab="p",ylab="wbar",main="Mean Fitness vs. p") # plot wbar vs p
+    plot(p2,dp,type="l",xlab="p",ylab="∆p",main="∆p vs. p") #and plot ∆p vs p
+    abline(h=0,col="red")
+    par(mfrow=c(1,1))
+  }
+  if(out){
+    list(Generations=ngen,p.time=p,p.01=p2,mean.fitness=wbar2,delta.p=dp)
+  }
+}
