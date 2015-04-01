@@ -1,4 +1,4 @@
-deltaP <-function (pinit, w11,w12,w22,ngen=100,plot=TRUE,out=FALSE){
+deltaP <-function (w11,w12,w22,ngen=100,plot=TRUE,out=FALSE,pinit=.1){
   p <-c(pinit,rep(0,ngen-1)) # create vector for p
   dpg <-c(0,rep(0,ngen-1)) # create vector for ∆p
   for(i in 2:ngen){
