@@ -157,9 +157,10 @@ read.ms.output <- function( txt=NA, file.ms.output=NA ) {
 #	cat("\n")
     list(segsites=segsites, gametes=gamlist, probs=probs, times=t(times), positions=positions, nsam=nsam, nreps=ndraws ) 
 }
-MK <-function(Div,Poly){
-  tbl <-rbind(Div,Poly,correct=TRUE)
+MK <-function(NS,SS){
+  options(warn= -1)
+  tbl <-rbind(NS,SS,correct=TRUE)
   ch <-chisq.test(tbl)
-  FI <-(Div[1]*Poly[2])/(Div[2]*Poly[1])
-  list(ch,FI)
+  FI <-((NS[1]/NS[2])/(SS[1]/SS[2]))
+  list(Chi.squared=ch,FI=FI)
 }
