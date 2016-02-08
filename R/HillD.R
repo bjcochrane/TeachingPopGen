@@ -1,6 +1,6 @@
 # Function to calculate two locus linkage disequilibrium from a 3X3 array of genotype numbers
 # From Hill, 1974.  Heredity 33: 229-239.
-HillD <-function(gmat){
+HillD <-function(gmat,pl=TRUE){
   X11 <- 2*gmat[1,1]+gmat[1,2]+gmat[2,1]
   X12 <-2*gmat[1,3]+gmat[1,2]+gmat[2,3]
   X21 <- 2*gmat[3,1]+gmat[2,1]+gmat[3,2] #NS
@@ -20,6 +20,8 @@ HillD <-function(gmat){
     f11[i+1] <-fnew
   }
   D <- f11-phat*qhat
-  plot(D,type="b",xlab="Iteration",ylab="D")
-  return(D)
+  if(pl){
+  plot(D,type="b",xlab="Iteration",ylab="D")}
+  data.frame(Iteration=1:20,D)
+  
 }
