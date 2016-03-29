@@ -1,10 +1,13 @@
 ## Basic read function
 library(XML)
+library(httr)
 library(stringr)
 read.alfred <-function(siteid){
-  url <-"http://alfred.med.yale.edu/alfred/SiteTable1A_working.asp?siteuid="
+  url <-"https://alfred.med.yale.edu/alfred/SiteTable1A_working.asp?siteuid="
   the.url <-paste(url,siteid,sep="")
-  dat.region <- readHTMLTable(the.url,which=3)
+  tabs <- GET(the.url)
+  dat.region <- readHTMLTable(rawToChar(tabs$content), which=3)
+  #dat.region <- readHTMLTable(the.url,which=3,method="curl")
   dat.region <-dat.region[-(1:2),]
   test <-as.numeric(str_sub(dat.region$V3,start=1,end=2))
   dat.region$V3=test
